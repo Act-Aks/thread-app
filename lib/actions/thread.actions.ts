@@ -37,7 +37,7 @@ export async function createThread({
     //Updating user model
     await User.findByIdAndUpdate(author, {
       $push: {
-        thread: createdThread._id,
+        threads: createdThread._id,
       },
     });
 
@@ -61,7 +61,10 @@ export async function fetchThreads(pageNumber = 1, pageSize = 20) {
       .sort({ createdAt: "desc" })
       .skip(skipAmount)
       .limit(pageSize)
-      .populate({ path: "author", model: User })
+      .populate({
+        path: "author",
+        model: User,
+      })
       .populate({
         path: "children",
         populate: {
