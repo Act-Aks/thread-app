@@ -1,3 +1,4 @@
+import { formatDateString } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -103,6 +104,24 @@ const ThreadCard = ({
           </div>
         </div>
       </div>
+      {!isComment && communtiy && (
+        <Link
+          href={`/communities/${communtiy.id}`}
+          className="mt-5 flex items-center"
+        >
+          <p className="text-subtle-medium text-gray-1">
+            {`${formatDateString(createdAt)} - ${communtiy.name} Community`}
+          </p>
+
+          <Image
+            src={communtiy.image}
+            alt={communtiy.name}
+            width={14}
+            height={14}
+            className="ml-1 rounded-full object-cover"
+          />
+        </Link>
+      )}
     </article>
   );
 };
